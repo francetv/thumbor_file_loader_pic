@@ -3,9 +3,10 @@ Thumbor Fileloader loader
 
 
 ```
-LOADER = 'thumbor_fallback_pic_loader.loader' #loader calling. Don't call with fallback
-PIC_LOADER_ROOT_PATH = #root path for file
+LOADER = 'thumbor_fallback_pic_loader.loader' #loader calling.
 
+PIC_LOADER_ROOT_PATH = #root path for file
+PIC_LOADER_FALLBACK_PATH = #fallback path for file
 ```
 
 Tested on Debian 9 with:
