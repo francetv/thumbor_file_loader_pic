@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
@@ -25,12 +24,12 @@ def load(context, path, callback):
         context.config.PIC_LOADER_ROOT_PATH.rstrip('/'), path.lstrip('/'))
     file_path = abspath(file_path)
     file_path_two = join(
-        context.config.FILE_LOADER_ROOT_PATH.rstrip('/'), path.lstrip('/'))
+        context.config.PIC_LOADER_FALLBACK_PATH.rstrip('/'), path.lstrip('/'))
     file_path_two = abspath(file_path_two)
     inside_root_path = file_path.startswith(
         abspath(context.config.PIC_LOADER_ROOT_PATH))
     inside_root_path_two = file_path_two.startswith(
-        abspath(context.config.FILE_LOADER_ROOT_PATH))
+        abspath(context.config.PIC_LOADER_FALLBACK_PATH))
     result = LoaderResult()
 
     if not inside_root_path:
