@@ -9,7 +9,7 @@ from distutils.core import setup
 setup(
     name = "thumbor_file_loader_pic",
     packages = ["thumbor_file_loader_pic"],
-    version = "0.1.2",
+    version = "1.0.1",
     description = "file loader",
     author = "Bertrand Thill",
     author_email = "bertrand.thill@francetv.fr",
