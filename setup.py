@@ -9,7 +9,7 @@ from distutils.core import setup
 setup(
     name = "thumbor_file_loader_pic",
     packages = ["thumbor_file_loader_pic"],
-    version = "1.0.1",
+    version = "7.0.0",
     description = "file loader",
     author = "Bertrand Thill",
     author_email = "bertrand.thill@francetv.fr",
@@ -21,12 +21,12 @@ setup(
                    'License :: OSI Approved :: MIT License',
                    'Natural Language :: English',
                    'Operating System :: POSIX :: Linux',
-                   'Programming Language :: Python :: 3.5',
+                   'Programming Language :: Python :: 3.6',
                    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
                    'Topic :: Multimedia :: Graphics :: Presentation'
     ],
     package_dir = {"thumbor_file_loader_pic": "thumbor_file_loader_pic"},
-    install_requires=['thumbor>=6.5.0'],
+    install_requires=['thumbor>=7.0.0'],
     long_description = """\
 This module test support for file.
 """

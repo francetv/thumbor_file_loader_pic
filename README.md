@@ -1,5 +1,5 @@
 # thumbor_file_loader_pic
-Thumbor Fileloader loader
+Thumbor 7 Fileloader loader python 3.6 (async) 
 
 
 ```
@@ -9,6 +9,6 @@ PIC_LOADER_ROOT_PATH = #root path for file
 PIC_LOADER_FALLBACK_PATH = #fallback path for file
 ```
 
-Tested on Debian 9 with:
-- Thumbor (pip) 6.5
+Tested on Debian 10 with:
+- Thumbor (pip) XX
 
