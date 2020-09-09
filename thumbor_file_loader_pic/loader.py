@@ -18,8 +18,7 @@ from tornado.concurrent import return_future
 from thumbor.loaders import LoaderResult
 
 
-@return_future
-def load(context, path, callback):
+async def load(context, path):
     file_path = join(
         context.config.PIC_LOADER_ROOT_PATH.rstrip('/'), path.lstrip('/'))
     file_path = abspath(file_path)
@@ -30,14 +29,20 @@ def load(context, path, callback):
         abspath(context.config.PIC_LOADER_ROOT_PATH))
     inside_root_path_two = file_path_two.startswith(
         abspath(context.config.PIC_LOADER_FALLBACK_PATH))
+    
+    if not exists(context.config.PIC_LOADER_MAX_SIZE):
+        oversize = context.config.PIC_LOADER_MAX_SIZE
+    else:
+        oversize = 16777216
+    
     result = LoaderResult()
 
     if not inside_root_path:
         if not inside_root_path_two:
           result.error = LoaderResult.ERROR_NOT_FOUND
           result.successful = False
-          callback(result)
-        return
+          return result #callback(result)
+        pass #return
 
     # keep backwards compatibility, try the actual path first
     # if not found, unquote it and try again
@@ -50,27 +55,33 @@ def load(context, path, callback):
     if exists(file_path):
         with open(file_path, 'r') as f:
             stats = fstat(f.fileno())
+            if stats.st_size >= oversize:
+                result.error = LoaderResult.COULD_NOT_LOAD_IMAGE
+                result.successful = False
+            else:
+                result.successful = True
+                result.buffer = f.read()
 
-            result.successful = True
-            result.buffer = f.read()
-
-            result.metadata.update(
-                size=stats.st_size,
-                updated_at=datetime.utcfromtimestamp(stats.st_mtime))
+                result.metadata.update(
+                  size=stats.st_size,
+                  updated_at=datetime.utcfromtimestamp(stats.st_mtime))
     elif exists(file_path_two):
          with open(file_path_two, 'r') as f:
             stats = fstat(f.fileno())
+            if stats.st_size >= oversize:
+                result.error = LoaderResult.COULD_NOT_LOAD_IMAGE
+                result.successful = False
+            else:
+                result.successful = True
+                result.buffer = f.read()
 
-            result.successful = True
-            result.buffer = f.read()
-
-            result.metadata.update(
-                size=stats.st_size,
-                updated_at=datetime.utcfromtimestamp(stats.st_mtime))
+                result.metadata.update(
+                  size=stats.st_size,
+                  updated_at=datetime.utcfromtimestamp(stats.st_mtime))
 
 
     else:
         result.error = LoaderResult.ERROR_NOT_FOUND
         result.successful = False
 
-    callback(result)
+    return result
