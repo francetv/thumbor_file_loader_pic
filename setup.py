@@ -26,7 +26,7 @@ setup(
                    'Topic :: Multimedia :: Graphics :: Presentation'
     ],
     package_dir = {"thumbor_file_loader_pic": "thumbor_file_loader_pic"},
-    install_requires=['thumbor>=7.0.0'],
+    install_requires=['thumbor>=7.0.0a5'],
     long_description = """\
 This module test support for file.
 """
