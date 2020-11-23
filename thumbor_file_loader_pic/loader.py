@@ -18,7 +18,7 @@ from tornado.concurrent import return_future
 from thumbor.loaders import LoaderResult
 
 
-async def load(context, path):
+def load(context, path):
     file_path = join(
         context.config.PIC_LOADER_ROOT_PATH.rstrip('/'), path.lstrip('/'))
     file_path = abspath(file_path)
